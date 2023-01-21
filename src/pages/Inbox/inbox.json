@@ -1,0 +1,84 @@
+[
+  {
+    "id": "77650d48-5bc8-4df8-835a-423e6bce9d7e",
+    "title": "109220-Naturalization",
+    "senderName": "Cameron Phillips",
+    "participants": 3,
+    "latestMessage": "Please check this out!",
+    "isStaff": false,
+    "latestMessageAt": "January 1,2021 19:10",
+    "chats": [
+      {
+        "id": "2f8b3f52-2640-41f1-ac88-d36c6229f81a",
+        "userId": "23f4c724-c8b2-4b98-bc69-7b32ad320230",
+        "name": "You",
+        "message": "No worries. It will be completed ASAP. I’ve asked him yesterday.",
+        "createdAt": "19:32"
+      },
+      {
+        "id": "883ee818-3880-434f-a73b-6b8bc6a7a01e",
+        "userId": "7f17fc0b-47a6-4d06-b947-3eab8cd8d5cb",
+        "name": "Mary Hilda",
+        "message": "Hello Obaidullah, I will be your case advisor for case #029290. I have assigned some homework for you to fill. Please keep up with the due dates. Should you have any questions, you can message me anytime. Thanks.",
+        "createdAt": "19:32"
+      },
+      {
+        "id": "cca091ce-2cde-4589-826f-11c3c74d78c7",
+        "userId": "23f4c724-c8b2-4b98-bc69-7b32ad320230",
+        "name": "You",
+        "message": "Please contact Mary for questions regarding the case bcs she will be managing your forms from now on! Thanks Mary.",
+        "createdAt": "19:32"
+      },
+      {
+        "id": "6b24d133-7038-4076-bdb3-6d93210c0f35",
+        "userId": "7f17fc0b-47a6-4d06-b947-3eab8cd8d5cb",
+        "name": "Mary Hilda",
+        "message": "Sure thing, Claren",
+        "createdAt": "19:32"
+      },
+      {
+        "id": "d06910a7-65cb-4f81-9842-155a2b264e1f",
+        "userId": "41b6f875-5c77-4564-a0b6-c6d92a5d2aad",
+        "name": "Obaidullah Amarkhil",
+        "message": "Morning. I’ll try to do them. Thanks",
+        "createdAt": "19:32"
+      }
+    ]
+  },
+  {
+    "id": "0986dc5b-75ff-4b41-b4a7-7adb093a644f",
+    "title": "Jeannette Moraima Guaman Chamba (Hutto I-589) [ Hutto Follow Up - Brief Service ]",
+    "senderName": "Ellen",
+    "participants": 3,
+    "latestMessage": "Hey, please read.",
+    "isStaff": false,
+    "latestMessageAt": "02/06/2021 10:45"
+  },
+  {
+    "id": "b38f8e78-d305-4d46-8629-5a518b6a1eb2",
+    "title": "8405-Diana SALAZAR MUNGUIA",
+    "senderName": "Cameron Phillips",
+    "participants": 3,
+    "latestMessage": "I understand your initial concerns and thats very valid, Elizabeth. But you ...",
+    "isStaff": false,
+    "latestMessageAt": "01/06/2021 12:19"
+  },
+  {
+    "id": "54f6eb62-2c45-4720-8cfa-500b3819d215",
+    "title": "FastVisa Support",
+    "senderName": "Cameron Phillips",
+    "participants": 0,
+    "latestMessage": "Hey there! Welcome to your inbox.",
+    "isStaff": true,
+    "createdAt": "01/06/2021 12:19",
+    "chats": [
+      {
+        "id": "3a27f5c9-ca52-44ad-8fef-9f5158477fd3",
+        "userId": "6d93f379-f6ff-4538-9d9a-e2a539a3c7ad",
+        "name": "FastVisa Support",
+        "message": "Hey there. Welcome to your inbox! Contact us for more information and help about anything! We’ll send you a response as soon as possible.",
+        "createdAt": "19:32"
+      }
+    ]
+  }
+]

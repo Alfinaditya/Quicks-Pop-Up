@@ -1,15 +1,25 @@
 import styled from "styled-components";
+import { Box, Input } from "../../sharedStyles";
 
-export const Box = styled.div`
-  /* margin-top: 186px; */
-  /* margin-left: auto; */
+export const InboxBox = styled(Box)`
+  padding: 22px 32px;
+`;
 
-  position: absolute;
-  bottom: 10%;
-  right: 0;
-  height: 70vh;
-  width: 30vw;
-  border-radius: 10px;
-  margin-right: 34px;
-  background: yellow;
+export const SearchInput = styled(Input)`
+  margin-bottom: 22px;
+  width: 100%;
+`;
+
+export const Container = styled.div`
+  margin-bottom: 22px;
+`;
+
+export const Title = styled.h1`
+  font-weight: bold;
+  font-size: 16px;
+`;
+
+export const SenderName = styled.h2`
+  font-weight: bold;
+  font-size: 14px;
 `;

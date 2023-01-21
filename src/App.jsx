@@ -1,9 +1,8 @@
-import { useState } from "react";
 import styled from "styled-components";
 import BaseStyles from "./BaseStyles";
-import NormalizeStyles from "./NormalizeStyles";
 import Header from "./partials/Header";
 import AllRoutes from "./routes";
+import "./fonts/lato.css";
 
 const PopUpContainer = styled.div`
   /* background: yellow;
@@ -32,12 +31,9 @@ const Right = styled.div`
 `;
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <AppContainer>
       <Left />
-      <NormalizeStyles />
       <BaseStyles />
       <Right>
         <Header />
