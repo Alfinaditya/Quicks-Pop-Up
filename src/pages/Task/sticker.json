@@ -1,0 +1,42 @@
+[
+  {
+    "id": "01184b8c-1843-4ff5-b588-e8821b294ad2",
+    "name": "Important ASAP",
+    "color": "#E5F1FF"
+  },
+  {
+    "id": "f9278ede-0859-4e3d-8ceb-12f08eb41956",
+    "name": "Offline Meeting",
+    "color": "#FDCFA4"
+  },
+  {
+    "id": "ad19d539-f866-4643-9708-127f597a6916 ",
+    "name": "Virtual Meeting",
+    "color": "#F9E9C3"
+  },
+  {
+    "id": "13dc0e4d-e631-4e76-aa73-a931668ac094",
+    "name": "ASAP",
+    "color": "#AFEBDB"
+  },
+  {
+    "id": "a779b490-b7d8-4dc2-9e48-0bf6094b65e8",
+    "name": "Client Related",
+    "color": "#CBF1C2"
+  },
+  {
+    "id": "e07d8ae1-4931-463a-855c-aa095c6a9e4f",
+    "name": "Self Task",
+    "color": "#CFCEF9"
+  },
+  {
+    "id": "a95e1f37-9851-4da8-9b78-269a6850392e",
+    "name": "Appointments",
+    "color": "#F9E0FD"
+  },
+  {
+    "id": "16c10aa6-bec3-4819-a6b9-5ce7f17d9c9f",
+    "name": "Court Related",
+    "color": "#9DD0ED"
+  }
+]

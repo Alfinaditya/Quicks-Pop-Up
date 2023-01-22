@@ -10,7 +10,19 @@
         "description": "Closing off this case since this application has been cancelled. No one really understand how this case could possibly be cancelled. The options and the documents within this document were totally a guaranteed for a success!",
         "daysLeft": 2,
         "createdAt": "12-06-2021",
-        "isFinished": false
+        "isFinished": false,
+        "stickers": [
+          {
+            "id": "01184b8c-1843-4ff5-b588-e8821b294ad2",
+            "name": "Important ASAP",
+            "color": "#E5F1FF"
+          },
+          {
+            "id": "f9278ede-0859-4e3d-8ceb-12f08eb41956",
+            "name": "Offline Meeting",
+            "color": "#FDCFA4"
+          }
+        ]
       },
       {
         "id": "975a8317-aac0-4f15-82c6-5de9e77d1174",
@@ -19,7 +31,8 @@
         "description": "All Cases must include all payment transactions, all documents and forms filled. All conversations in comments and messages in channels and emails should be provided as well in.",
         "daysLeft": 4,
         "createdAt": "12-06-2021",
-        "isFinished": false
+        "isFinished": false,
+        "stickers": []
       }
     ]
   },
@@ -34,7 +47,8 @@
         "description": "",
         "daysLeft": 10,
         "createdAt": "03-06-2021",
-        "isFinished": false
+        "isFinished": false,
+        "stickers": []
       },
       {
         "id": "f80871a4-055e-4ace-9bc8-ce9d8bf8dd9c",
@@ -43,7 +57,8 @@
         "description": "",
         "daysLeft": -1,
         "createdAt": "03-06-2021",
-        "isFinished": true
+        "isFinished": true,
+        "stickers": []
       },
       {
         "id": "f3a02c9e-0ccc-4d87-92c4-018eb78ddfae",
@@ -52,7 +67,8 @@
         "description": "",
         "daysLeft": -1,
         "createdAt": "02-06-2021",
-        "isFinished": true
+        "isFinished": true,
+        "stickers": []
       }
     ]
   }

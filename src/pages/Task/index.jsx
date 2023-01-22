@@ -12,15 +12,17 @@ import {
   Title,
 } from "./styles";
 import tasksFromServer from "./task.json";
+import stickersFromServer from "./sticker.json";
 import dayjs from "dayjs";
-import customParseFormat from "dayjs/plugin/customParseFormat";
 
 const Task = () => {
   const [openDropdown, setOpenDropdown] = useState(false);
   const [tasks, setTasks] = useState([]);
+  const [stickers, setStickers] = useState([]);
   const [tasksDropdown, setTasksDropdown] = useState([]);
   const [filteringTasks, setFilteringTasks] = useState(false);
   const [showOptionsBubbleById, setShowOptionsBubbleById] = useState("");
+  const [showStickersBubbleById, setShowStickersBubbleById] = useState("");
   const [calendarValue, setCalendarValue] = useState("");
   const [showEditDescriptionInputById, setShowEditDescriptionInputById] =
     useState("");
@@ -30,6 +32,7 @@ const Task = () => {
     setTimeout(() => {
       setTasks(tasksFromServer);
       setTasksDropdown(tasksFromServer);
+      setStickers(stickersFromServer);
     }, 2000);
   }, []);
 
@@ -158,6 +161,27 @@ const Task = () => {
     const updatedTodos = tasks.map((task) => {
       return task.todos.filter((todo) => {
         return todo.id !== id;
+      });
+    });
+    const updatedTasks = tasks.map((task, i) => {
+      return { ...task, todos: updatedTodos[i] };
+    });
+    setTasks(updatedTasks);
+  }
+
+  function handleAddSticker(id, stickerId) {
+    const sticker = stickers.find((sticker) => sticker.id === stickerId);
+
+    const updatedTodos = tasks.map((task) => {
+      return task.todos.map((todo) => {
+        if (todo.id === id) {
+          // To Check if Current Todos sticker contains duplicate value
+          if (todo.stickers.find((st) => st.id === sticker.id)) {
+            return { ...todo };
+          }
+          return { ...todo, stickers: [...todo.stickers, sticker] };
+        }
+        return { ...todo };
       });
     });
     const updatedTasks = tasks.map((task, i) => {
@@ -302,6 +326,65 @@ const Task = () => {
                                 );
                               }}
                             />
+                          </div>
+                        </div>
+                        <div
+                          style={{
+                            display: "flex",
+                            background: "aqua",
+                            position: "relative",
+                          }}
+                        >
+                          <p
+                            onClick={() =>
+                              setShowStickersBubbleById(
+                                (showStickersBubbleById) =>
+                                  showStickersBubbleById === todo.id
+                                    ? ""
+                                    : todo.id
+                              )
+                            }
+                          >
+                            S
+                          </p>
+                          <div
+                            style={{
+                              display: "flex",
+                              marginLeft: "28px",
+                            }}
+                          >
+                            {todo.stickers.map((sticker) => (
+                              <div
+                                key={sticker.id}
+                                style={{
+                                  background: sticker.color,
+                                  color: "black",
+                                }}
+                              >
+                                {sticker.name}
+                              </div>
+                            ))}
+                          </div>
+                          <div
+                            style={{
+                              position: "absolute",
+                              // top: "58%",
+                              zIndex: 999,
+                              top: 20,
+                              left: 0,
+                            }}
+                          >
+                            {showStickersBubbleById === todo.id &&
+                              stickers.map((sticker) => (
+                                <div
+                                  onClick={() =>
+                                    handleAddSticker(todo.id, sticker.id)
+                                  }
+                                  key={sticker.id}
+                                >
+                                  <div>{sticker.name}</div>
+                                </div>
+                              ))}
                           </div>
                         </div>
                         <div style={{ display: "flex" }}>

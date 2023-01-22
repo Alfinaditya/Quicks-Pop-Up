@@ -104,7 +104,7 @@ const InboxDetail = () => {
                 </Left>
                 <Options
                   onClick={() =>
-                    setShowOptionsBubleById((showOptionsBubbleById) =>
+                    setShowOptionsBubbleById((showOptionsBubbleById) =>
                       showOptionsBubbleById === chat.id ? "" : chat.id
                     )
                   }
