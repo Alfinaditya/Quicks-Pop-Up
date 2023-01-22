@@ -8,6 +8,10 @@ import {
   Head,
   InboxDetailBox,
   SendMessageInput,
+  Options,
+  OptionsBubble,
+  Right,
+  Left,
 } from "./style";
 import { USER_ID } from "../../../helpers/const";
 import { Button } from "../../../sharedStyles";
@@ -18,6 +22,7 @@ const InboxDetail = () => {
   const [message, setMessage] = useState("");
   const [showWaitingToConnectAlert, setShowWaitingToConnectAlert] =
     useState(false);
+  const [showOptionsBubbleById, setShowOptionsBubbleById] = useState("");
   const [inbox, setInbox] = useState(
     inboxesFromServer.find((inbox) => {
       return inbox.id === id;
@@ -43,6 +48,7 @@ const InboxDetail = () => {
       <Head>
         <h2>{inbox.title}</h2>
         <p onClick={() => navigate("/")}>X</p>
+        {!inbox.isStaff && <p>{inbox.participants} Participants</p>}
       </Head>
       <hr />
       <Body>
@@ -51,22 +57,66 @@ const InboxDetail = () => {
             {chat.userId === USER_ID ? (
               <ChatBubble
                 style={{
-                  textAlign: "right",
-                  display: "flex",
-                  justifyContent: "flex-end",
+                  marginLeft: "auto",
                 }}
               >
-                <div>...</div>
-                <div>
-                  <h2>{chat.name}</h2>
+                <Options
+                  onClick={() =>
+                    setShowOptionsBubbleById((showOptionsBubbleById) =>
+                      showOptionsBubbleById === chat.id ? "" : chat.id
+                    )
+                  }
+                >
+                  ...
+                </Options>
+                {showOptionsBubbleById && showOptionsBubbleById === chat.id && (
+                  <OptionsBubble type="me">
+                    <p>Edit</p>
+                    <p>Delete</p>
+                  </OptionsBubble>
+                )}
+                <Right>
+                  {i > 0 ? (
+                    <>
+                      {chat.userId !== inbox.chats[i - 1].userId && (
+                        <p>{chat.name}</p>
+                      )}
+                    </>
+                  ) : (
+                    <p>{chat.name}</p>
+                  )}
                   <p>{chat.message}</p>
-                </div>
+                  <p>{chat.createdAt}</p>
+                </Right>
               </ChatBubble>
             ) : (
               <ChatBubble>
-                <h2>{chat.name}</h2>
-                <p>{chat.message}</p>
-                <div>...</div>
+                {showOptionsBubbleById && showOptionsBubbleById === chat.id && (
+                  <OptionsBubble type="you">
+                    <p>Share</p>
+                    <p>Reply</p>
+                  </OptionsBubble>
+                )}
+                <Left>
+                  <p>{chat.name}</p>
+                  <p>{chat.message}</p>
+                  <p>{chat.createdAt}</p>
+                </Left>
+                <Options
+                  onClick={() =>
+                    setShowOptionsBubleById((showOptionsBubbleById) =>
+                      showOptionsBubbleById === chat.id ? "" : chat.id
+                    )
+                  }
+                >
+                  ...
+                </Options>
+                {/* {showOptionsBubble && (
+                  <OptionsBubble>
+                    <p>Edit</p>
+                    <p>Delete</p>
+                  </OptionsBubble>
+                )} */}
               </ChatBubble>
             )}
             {chat.isStaff === false && (
@@ -85,26 +135,35 @@ const InboxDetail = () => {
           position: "relative",
         }}
       > */}
-      <div style={{ position: "relative" }}>
-        <Footer>
-          {showWaitingToConnectAlert && (
-            <div style={{ marginBottom: "12px" }}>
-              Please wait while we connect you with one of our team ...
-            </div>
-          )}
-          <form onSubmit={(e) => handleSubmit(e)}>
-            <SendMessageInput
-              type="text"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              name="message"
-            />
-            <Button type="submit" disabled={!message}>
-              Send
-            </Button>
-          </form>
-        </Footer>
-      </div>
+      {/* <div style={{ position: "relative" }}> */}
+      <Footer>
+        {showWaitingToConnectAlert && (
+          <div
+            style={{
+              padding: "10px",
+              marginBottom: "10px",
+              background: "blue",
+            }}
+          >
+            Please wait while we connect you with one of our team ...
+          </div>
+          // <div style={{ marginBottom: "12px" }}>
+          //   Please wait while we connect you with one of our team ...
+          // </div>
+        )}
+        <form onSubmit={(e) => handleSubmit(e)}>
+          <SendMessageInput
+            type="text"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            name="message"
+          />
+          <Button type="submit" disabled={!message}>
+            Send
+          </Button>
+        </form>
+      </Footer>
+      {/* </div> */}
       {/* </div> */}
     </InboxDetailBox>
   );

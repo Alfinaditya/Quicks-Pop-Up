@@ -12,7 +12,7 @@ const FloatingActionButtons = () => {
         {showMenus && (
           <>
             <button onClick={() => navigate("inbox")}>Inbox</button>
-            <button>Task</button>
+            <button onClick={() => navigate("task")}>Task</button>
           </>
         )}
         <button onClick={() => setShowMenus(!showMenus)}>Petir</button>

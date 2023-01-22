@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Inbox from "./pages/Inbox";
 import InboxDetail from "./pages/Inbox/Inbox[id]";
+import Task from "./pages/Task";
 import FloatingActionButtons from "./partials/FloatingActionButtons";
 
 const AllRoutes = () => {
@@ -18,7 +19,10 @@ const AllRoutes = () => {
           <Route path="inbox" element={<Inbox />} />
           <Route path="inbox/:id" element={<InboxDetail />} />
           {/* INBOX */}
-          <Route path="todo" element={<Todo />} />
+
+          {/* Task */}
+          <Route path="task" element={<Task />} />
+          {/* Task */}
         </Routes>
         <FloatingActionButtons />
       </BrowserRouter>
