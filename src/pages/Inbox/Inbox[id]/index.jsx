@@ -23,6 +23,7 @@ const InboxDetail = () => {
   const [showWaitingToConnectAlert, setShowWaitingToConnectAlert] =
     useState(false);
   const [showOptionsBubbleById, setShowOptionsBubbleById] = useState("");
+  const [replyMessage, setReplyMessage] = useState("");
   const [inbox, setInbox] = useState(
     inboxesFromServer.find((inbox) => {
       return inbox.id === id;
@@ -30,19 +31,34 @@ const InboxDetail = () => {
   );
 
   function handleSubmit(e) {
+    e.preventDefault();
+
     if (inbox.isStaff) {
       setShowWaitingToConnectAlert(true);
     }
-    e.preventDefault();
-    const params = {
+    const myReply = {
+      id: crypto.randomUUID(),
+      userId: USER_ID,
+      name: "You",
+      message: replyMessage.message,
+      createdAt: "19:32",
+    };
+    const x = {
       id: crypto.randomUUID(),
       userId: USER_ID,
       name: "You",
       message,
       createdAt: "19:32",
     };
-    setInbox({ ...inbox, chats: [...inbox.chats, params] });
+    const params = replyMessage ? [myReply, x] : [x];
+    setInbox({ ...inbox, chats: [...inbox.chats, ...params] });
+    setReplyMessage("");
   }
+  function handleReplyMessage(id) {
+    const x = inbox.chats.find((chat) => chat.id === id);
+    setReplyMessage(x);
+  }
+
   return (
     <InboxDetailBox>
       <Head>
@@ -94,7 +110,7 @@ const InboxDetail = () => {
                 {showOptionsBubbleById && showOptionsBubbleById === chat.id && (
                   <OptionsBubble type="you">
                     <p>Share</p>
-                    <p>Reply</p>
+                    <p onClick={() => handleReplyMessage(chat.id)}>Reply</p>
                   </OptionsBubble>
                 )}
                 <Left>
@@ -119,7 +135,7 @@ const InboxDetail = () => {
                 )} */}
               </ChatBubble>
             )}
-            {chat.isStaff === false && (
+            {!chat.isStaff && (
               <>
                 {i === 3 && <p>New Message</p>}
                 {i === 0 && <p>Today June 09,2021</p>}
@@ -150,6 +166,13 @@ const InboxDetail = () => {
           // <div style={{ marginBottom: "12px" }}>
           //   Please wait while we connect you with one of our team ...
           // </div>
+        )}
+        {replyMessage && (
+          <div>
+            <strong>Replying to {replyMessage.name}</strong>
+            <p>{replyMessage.message}</p>
+            <div onClick={() => setReplyMessage("")}>x</div>
+          </div>
         )}
         <form onSubmit={(e) => handleSubmit(e)}>
           <SendMessageInput
