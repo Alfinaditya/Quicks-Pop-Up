@@ -43,20 +43,28 @@ const InboxDetail = () => {
       message: replyMessage.message,
       createdAt: "19:32",
     };
-    const x = {
+    const newMessage = {
       id: crypto.randomUUID(),
       userId: USER_ID,
       name: "You",
       message,
       createdAt: "19:32",
     };
-    const params = replyMessage ? [myReply, x] : [x];
+    const params = replyMessage ? [myReply, newMessage] : [newMessage];
     setInbox({ ...inbox, chats: [...inbox.chats, ...params] });
     setReplyMessage("");
   }
   function handleReplyMessage(id) {
-    const x = inbox.chats.find((chat) => chat.id === id);
+    setShowOptionsBubbleById("");
+    const x = inbox.chats.map((chat) => chat.id === id);
     setReplyMessage(x);
+  }
+  function handleDeleteMessage(id) {
+    setShowOptionsBubbleById("");
+    // console.log(id);
+    // console.log(inbox.chats);
+    const x = inbox.chats.filter((chat) => chat.id !== id);
+    setInbox({ ...inbox, chats: x });
   }
 
   return (
@@ -88,7 +96,7 @@ const InboxDetail = () => {
                 {showOptionsBubbleById && showOptionsBubbleById === chat.id && (
                   <OptionsBubble type="me">
                     <p>Edit</p>
-                    <p>Delete</p>
+                    <p onClick={() => handleDeleteMessage(chat.id)}>Delete</p>
                   </OptionsBubble>
                 )}
                 <Right>
