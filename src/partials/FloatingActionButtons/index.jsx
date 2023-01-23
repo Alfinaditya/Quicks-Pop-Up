@@ -1,23 +1,47 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Container, SubContainer } from "./styles";
+import { BubbleChatIcon, ReadModeIcon, ThunderIcon } from "../../icons";
+import {
+  Container,
+  InboxButtton,
+  ShowMenusButton,
+  Menu,
+  TaskButton,
+  MenuTitle,
+  MenuContainer,
+} from "./styles";
 
 const FloatingActionButtons = () => {
   const [showMenus, setShowMenus] = useState(false);
   const navigate = useNavigate();
   return (
-    <Container>
-      <SubContainer>
+    <Menu>
+      <Container>
         {showMenus && (
           <>
-            <button onClick={() => navigate("inbox")}>Inbox</button>
-            <button onClick={() => navigate("task")}>Task</button>
+            <MenuContainer>
+              <MenuTitle>Inbox</MenuTitle>
+              <InboxButtton onClick={() => navigate("inbox")}>
+                <BubbleChatIcon />
+              </InboxButtton>
+            </MenuContainer>
+            <MenuContainer>
+              <MenuTitle>Task</MenuTitle>
+              <TaskButton onClick={() => navigate("task")}>
+                <ReadModeIcon />
+              </TaskButton>
+            </MenuContainer>
           </>
         )}
-        <button onClick={() => setShowMenus(!showMenus)}>Petir</button>
-      </SubContainer>
-    </Container>
+        <MenuContainer>
+          <MenuTitle>&nbsp;</MenuTitle>
+          <ShowMenusButton onClick={() => setShowMenus(!showMenus)}>
+            <ThunderIcon />
+          </ShowMenusButton>
+        </MenuContainer>
+      </Container>
+    </Menu>
   );
 };
 

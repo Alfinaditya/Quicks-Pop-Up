@@ -6,7 +6,10 @@ export default createGlobalStyle`
     margin: 0;
     padding: 0;
     font-family: 'Lato', sans-serif;
-    background:black;
-    color:white;
+  }
+  body{
+    background:#262626;
+    /* color:#F2F2F2; */
+    color:#4F4F4F;
   }
 `;

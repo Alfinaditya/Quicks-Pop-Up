@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useRef } from "react";
 import Loading from "../../components/Loading";
-import { Button, Input } from "../../sharedStyles";
 import {
   Body,
   Dropdown,
@@ -14,6 +13,7 @@ import {
 import tasksFromServer from "./task.json";
 import stickersFromServer from "./sticker.json";
 import dayjs from "dayjs";
+import Button from "../../components/Button";
 
 const Task = () => {
   const [openDropdown, setOpenDropdown] = useState(false);
@@ -101,18 +101,15 @@ const Task = () => {
           message: "",
           createdAt: "",
           daysLeft: "",
+          stickers: [],
         };
         return { ...task, todos: [...task.todos, params] };
       }
       return { ...task };
     });
     setTasks(newTodo);
-    // const updatedTasks = tasks.map((task, i) => {
-    //   return { ...task, todos: addTodos[i] };
-    // });
-    // setTasks({ ...task, chats: [...inbox.chats, params] });
-    // setTasks(updatedTasks);
   }
+
   function handleUpdateTodoDescription(id, value) {
     setShowEditDescriptionInputById("");
     const updatedTodos = tasks.map((task) => {
@@ -214,7 +211,7 @@ const Task = () => {
             </>
           )}
         </Dropdown>
-        <Button onClick={() => handleAddTodo()}>New Task</Button>
+        <Button onClick={() => handleAddTodo()}>Halo</Button>
       </Head>
       {tasks.length && !filteringTasks ? (
         tasks.map((task) => (
