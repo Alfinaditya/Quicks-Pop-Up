@@ -5,7 +5,7 @@ export const Box = styled.div`
   bottom: 13%;
   right: 0;
   height: 70vh;
-  width: 30vw;
+  width: 36.9vw;
   margin-right: 34px;
   border-radius: 10px;
   overflow-y: scroll;

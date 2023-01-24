@@ -191,7 +191,7 @@ export const OptionsBubble = styled.div`
     `};
 `;
 
-export const NewMessageContainer = styled.div`
+export const NewMessageAlert = styled.div`
   background: #e9f3ff;
   width: 141.83px;
   height: 33.89px;

@@ -23,7 +23,7 @@ import {
   Reply,
   Share,
   ReplyText,
-  NewMessageContainer,
+  NewMessageAlert,
   NewMessageText,
   ReplyingTitle,
   ReplyingMessage,
@@ -228,10 +228,10 @@ const InboxDetail = () => {
             {!chat.isStaff && (
               <>
                 {i === 3 && (
-                  <NewMessageContainer>
+                  <NewMessageAlert>
                     <NewMessageText>New Message</NewMessageText>
                     <img src={ArrowDownWardIcon} />
-                  </NewMessageContainer>
+                  </NewMessageAlert>
                 )}
                 {i === 0 && <DateDivider>Today June 09,2021</DateDivider>}
               </>
@@ -245,10 +245,15 @@ const InboxDetail = () => {
             style={{
               padding: "10px",
               marginBottom: "10px",
-              background: "blue",
+              display: "flex",
+              background: "#E9F3FF",
+              paddingLeft: 14.41,
             }}
           >
-            Please wait while we connect you with one of our team ...
+            <div style={{ marginRight: 10 }}>X</div>
+            <strong>
+              Please wait while we connect you with one of our team ...
+            </strong>
           </div>
         )}
         <SendMessageForm onSubmit={(e) => handleSubmit(e)}>

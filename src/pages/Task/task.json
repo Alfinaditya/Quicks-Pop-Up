@@ -55,7 +55,7 @@
         "taskId": "54b34ddc-26fd-49ca-8f18-8e5461d640b5",
         "name": "Contact Mr Caleb - video conference? ",
         "description": "",
-        "daysLeft": -1,
+        "daysLeft": 0,
         "createdAt": "03-06-2021",
         "isFinished": true,
         "stickers": []
@@ -65,7 +65,7 @@
         "taskId": "54b34ddc-26fd-49ca-8f18-8e5461d640b5",
         "name": "Assign 3 homework to Client A",
         "description": "",
-        "daysLeft": -1,
+        "daysLeft": 0,
         "createdAt": "02-06-2021",
         "isFinished": true,
         "stickers": []
