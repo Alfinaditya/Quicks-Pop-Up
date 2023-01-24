@@ -16,6 +16,7 @@ export const Box = styled.div`
 export const Input = styled.input`
   height: 40px;
   border-radius: 5px;
+  border: 1px solid #828282;
 `;
 
 export const Button = styled.button`

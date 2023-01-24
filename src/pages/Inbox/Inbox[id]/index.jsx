@@ -8,17 +8,38 @@ import {
   Head,
   InboxDetailBox,
   SendMessageInput,
-  Options,
   OptionsBubble,
-  Right,
-  Left,
   DateDivider,
+  HeadText,
+  Title,
+  Participants,
+  SenderName,
+  ChatBubbleContainer,
+  Edit,
+  Delete,
+  DeleteText,
+  EditText,
+  Message,
+  Reply,
+  Share,
+  ReplyText,
+  NewMessageContainer,
+  NewMessageText,
+  ReplyingTitle,
+  ReplyingMessage,
+  ReplyingMessageContainer,
+  ReplyingMessageHead,
+  BottomLeftContainer,
+  SendMessageForm,
+  ShareText,
+  Time,
 } from "./style";
 import { USER_ID } from "../../../helpers/const";
 import Button from "../../../components/Button";
 import ArrowBackIcon from "../../../icons/arrow_back_icon.svg";
 import CloseIcon from "../../../icons/close_icon.svg";
 import ArrowDownWardIcon from "../../../icons/arrow_downward_icon.svg";
+import OptionsIcon from "../../../icons/options_icon.svg";
 
 const InboxDetail = () => {
   const { id } = useParams();
@@ -82,27 +103,13 @@ const InboxDetail = () => {
           onClick={() => navigate("/inbox")}
           src={ArrowBackIcon}
           alt=""
-          // style={{ cursor: "pointer" }}
         />
-        <div
-          style={{
-            flex: 1,
-            marginLeft: 18.43,
-            display: "flex",
-            flexDirection: "column ",
-            alignItems: "start",
-          }}
-        >
-          <h3 style={{ color: "#2F80ED" }}>{inbox.title}</h3>
-          <p
-            style={{
-              fontSize: 12,
-              color: "#333333",
-            }}
-          >
+        <HeadText>
+          <Title>{inbox.title}</Title>
+          <Participants>
             {!inbox.isStaff && inbox.participants} Participants
-          </p>
-        </div>
+          </Participants>
+        </HeadText>
         <img
           style={{ marginRight: 21, cursor: "pointer" }}
           src={CloseIcon}
@@ -114,101 +121,72 @@ const InboxDetail = () => {
         {inbox.chats.map((chat, i) => (
           <Fragment key={chat.id}>
             {chat.userId === USER_ID ? (
-              <div
-                style={{
-                  width: "60%",
-                  marginLeft: "auto",
-                  // position: "relative",
-                  textAlign: "right",
-                }}
-              >
+              <>
                 {i > 0 ? (
                   <>
                     {chat.userId !== inbox.chats[i - 1].userId && (
-                      <p style={{ color: chat.nameColor, marginBottom: "5px" }}>
+                      <SenderName type="me" color={chat.nameColor}>
                         {chat.name}
-                      </p>
+                      </SenderName>
                     )}
                   </>
                 ) : (
-                  <p style={{ color: chat.nameColor, marginBottom: "5px" }}>
+                  <SenderName type="me" color={chat.nameColor}>
                     {chat.name}
-                  </p>
+                  </SenderName>
                 )}
-                <div
-                  style={{
-                    display: "flex",
-                  }}
-                >
-                  <Options
+                <ChatBubbleContainer type="me">
+                  <img
+                    src={OptionsIcon}
                     onClick={() =>
                       setShowOptionsBubbleById((showOptionsBubbleById) =>
                         showOptionsBubbleById === chat.id ? "" : chat.id
                       )
                     }
-                  >
-                    ...
-                  </Options>
-
+                  />
                   <ChatBubble
+                    type="me"
                     style={{
                       background: chat.bubbleChatColor,
                     }}
                   >
-                    <Right>
+                    <Message>
                       <p>{chat.message}</p>
-                      <p>{chat.createdAt}</p>
-                    </Right>
+                      <Time>{chat.createdAt}</Time>
+                    </Message>
                     {showOptionsBubbleById &&
                       showOptionsBubbleById === chat.id && (
                         <OptionsBubble type="me">
-                          <div
-                            style={{
-                              height: 37.68,
-                              display: "flex",
-                              alignItems: "center",
-                              borderBottom: "1px solid #BDBDBD",
-                              paddingLeft: 18.39,
-                            }}
-                          >
-                            <p>Edit</p>
-                          </div>
-                          <div
-                            style={{
-                              paddingLeft: 18.39,
-                              height: 41.32,
-                              display: "flex",
-                              alignItems: "center",
-                            }}
-                          >
-                            <p onClick={() => handleDeleteMessage(chat.id)}>
+                          <Edit>
+                            <EditText>Edit</EditText>
+                          </Edit>
+                          <Delete>
+                            <DeleteText
+                              onClick={() => handleDeleteMessage(chat.id)}
+                            >
                               Delete
-                            </p>
-                          </div>
+                            </DeleteText>
+                          </Delete>
                         </OptionsBubble>
                       )}
                   </ChatBubble>
-                </div>
-              </div>
+                </ChatBubbleContainer>
+              </>
             ) : (
-              <div>
-                <p style={{ color: chat.nameColor }}>{chat.name}</p>
-                <div
-                  style={{
-                    width: "60%",
-                    display: "flex",
-                    // position: "relative",
-                  }}
-                >
+              <>
+                <SenderName style={{ color: chat.nameColor }}>
+                  {chat.name}
+                </SenderName>
+                <ChatBubbleContainer>
                   <ChatBubble style={{ backgroundColor: chat.bubbleChatColor }}>
-                    <Left>
+                    <Message>
                       <p>{chat.message}</p>
-                      <p>{chat.createdAt}</p>
-                    </Left>
+                      <Time>{chat.createdAt}</Time>
+                    </Message>
                     {showOptionsBubbleById &&
                       showOptionsBubbleById === chat.id && (
                         <OptionsBubble type="you">
-                          <div
+                          <Share
                             style={{
                               height: 37.68,
                               display: "flex",
@@ -217,9 +195,9 @@ const InboxDetail = () => {
                               paddingLeft: 12.46,
                             }}
                           >
-                            <p>Share</p>
-                          </div>
-                          <div
+                            <ShareText>Share</ShareText>
+                          </Share>
+                          <Reply
                             style={{
                               display: "flex",
                               alignItems: "center",
@@ -227,42 +205,33 @@ const InboxDetail = () => {
                               paddingLeft: 13.55,
                             }}
                           >
-                            <p onClick={() => handleReplyMessage(chat.id)}>
+                            <ReplyText
+                              onClick={() => handleReplyMessage(chat.id)}
+                            >
                               Reply
-                            </p>
-                          </div>
+                            </ReplyText>
+                          </Reply>
                         </OptionsBubble>
                       )}
                   </ChatBubble>
-                  <Options
+                  <img
+                    src={OptionsIcon}
                     onClick={() =>
                       setShowOptionsBubbleById((showOptionsBubbleById) =>
                         showOptionsBubbleById === chat.id ? "" : chat.id
                       )
                     }
-                  >
-                    ...
-                  </Options>
-                </div>
-              </div>
+                  />
+                </ChatBubbleContainer>
+              </>
             )}
             {!chat.isStaff && (
               <>
                 {i === 3 && (
-                  <div
-                    style={{
-                      background: "#E9F3FF",
-                      width: 141.83,
-                      height: 33.89,
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      margin: "auto",
-                    }}
-                  >
-                    <p style={{ color: "#2F80ED" }}>New Message</p>
+                  <NewMessageContainer>
+                    <NewMessageText>New Message</NewMessageText>
                     <img src={ArrowDownWardIcon} />
-                  </div>
+                  </NewMessageContainer>
                 )}
                 {i === 0 && <DateDivider>Today June 09,2021</DateDivider>}
               </>
@@ -282,28 +251,36 @@ const InboxDetail = () => {
             Please wait while we connect you with one of our team ...
           </div>
         )}
-        {replyMessage && (
-          <div>
-            <strong>Replying to {replyMessage.name}</strong>
-            <p>{replyMessage.message}</p>
-            <div onClick={() => setReplyMessage("")}>x</div>
-          </div>
-        )}
-        <form
-          onSubmit={(e) => handleSubmit(e)}
-          style={{ paddingRight: 20, paddingLeft: 20 }}
-        >
-          <SendMessageInput
-            type="text"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            name="message"
-          />
-          <Button>Send</Button>
+        <SendMessageForm onSubmit={(e) => handleSubmit(e)}>
+          <BottomLeftContainer>
+            {replyMessage && (
+              <ReplyingMessageContainer>
+                <ReplyingMessageHead>
+                  <ReplyingTitle>Replying to {replyMessage.name}</ReplyingTitle>
+                  <img onClick={() => setReplyMessage("")} src={CloseIcon} />
+                </ReplyingMessageHead>
+                <ReplyingMessage>{replyMessage.message}</ReplyingMessage>
+              </ReplyingMessageContainer>
+            )}
+            <SendMessageInput
+              type="text"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              name="message"
+              placeholder="Type a new message"
+            />
+          </BottomLeftContainer>
+          <Button
+            type="submit"
+            style={{ alignSelf: "end", marginLeft: "13px" }}
+            disabled={!message}
+          >
+            Send
+          </Button>
           {/* <Button type="submit" disabled={!message}>
             Send
           </Button> */}
-        </form>
+        </SendMessageForm>
       </Footer>
       {/* </div> */}
       {/* </div> */}
