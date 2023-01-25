@@ -1,14 +1,14 @@
 import React from "react";
 
-const GroupChatIcon = ({ ...rest }) => {
+const GroupChatIcon = ({ ...props }) => {
   return (
     <svg
-      {...rest}
       width="51"
       height="34"
       viewBox="0 0 51 34"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      {...props}
     >
       <path
         d="M34 17C34 26.3888 26.3888 34 17 34C7.61116 34 0 26.3888 0 17C0 7.61116 7.61116 0 17 0C26.3888 0 34 7.61116 34 17Z"

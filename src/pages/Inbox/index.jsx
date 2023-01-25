@@ -1,11 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { InboxBox, Container, SearchInput, SenderName, Title } from "./styles";
+import {
+  InboxBox,
+  Container,
+  SearchInput,
+  SenderName,
+  Title,
+  GroupChatIconContainer,
+  Chat,
+  ChatHead,
+  CircleNotification,
+  SearchIconContainer,
+  Head,
+  LatestMessageAt,
+  LatestMessage,
+  CircleNotificationContainer,
+} from "./styles";
 import inboxesFromServer from "./inbox.json";
 import Loading from "../../components/Loading";
-import GroupChatIcon from "../../icons/group_chat_icon.svg";
-import fastVisaSupport from "../../icons/fastvisa_support.svg";
-import searchIcon from "../../icons/search_icon.svg";
+import { GroupChatIcon, FastVisaSupportIcon, SearchIcon } from "../../icons";
 
 const Inbox = () => {
   const { pathname } = useLocation();
@@ -16,20 +29,15 @@ const Inbox = () => {
       setInboxes(inboxesFromServer);
     }, 2000);
   }, []);
+
   return (
     <InboxBox>
-      <div
-        style={{
-          position: "relative",
-          marginBottom: "22px",
-        }}
-      >
+      <Head>
         <SearchInput type="search" placeholder="Search" />
-        <img
-          src={searchIcon}
-          style={{ position: "absolute", top: 14, right: 86.32 }}
-        />
-      </div>
+        <SearchIconContainer>
+          <SearchIcon style={{ width: 12, height: 12 }} />
+        </SearchIconContainer>
+      </Head>
       {inboxes.length ? (
         inboxes.map((inbox, i) => (
           <Container
@@ -37,30 +45,30 @@ const Inbox = () => {
             onClick={() => navigate(`${pathname}/${inbox.id}`)}
             isLast={inboxes.length - 1 === i}
           >
-            <img src={inbox.isStaff ? fastVisaSupport : GroupChatIcon} alt="" />
-            <div style={{ marginLeft: "12px", flex: 1 }}>
-              <div style={{ display: "flex" }}>
+            <GroupChatIconContainer>
+              {inbox.isStaff ? (
+                <FastVisaSupportIcon style={{ width: 51, height: 34 }} />
+              ) : (
+                <GroupChatIcon style={{ width: 51, height: 34 }} />
+              )}
+            </GroupChatIconContainer>
+            <Chat>
+              <ChatHead>
                 <Title>{inbox.title} </Title>
-                <p>{inbox.latestMessageAt}</p>
-              </div>
-              <SenderName>{inbox.senderName} :</SenderName>
-              <p>{inbox.latestMessage}</p>
-            </div>
+                <LatestMessageAt>{inbox.latestMessageAt}</LatestMessageAt>
+              </ChatHead>
+              <SenderName>{inbox.senderName} :</SenderName>{" "}
+              <LatestMessage>{inbox.latestMessage}</LatestMessage>
+            </Chat>
             {i === 0 && (
-              <div
-                style={{
-                  width: 10,
-                  height: 10,
-                  background: "#EB5757",
-                  borderRadius: "50%",
-                  textAlign: "right",
-                }}
-              ></div>
+              <CircleNotificationContainer>
+                <CircleNotification />
+              </CircleNotificationContainer>
             )}
           </Container>
         ))
       ) : (
-        <Loading title="Loadng Chats" />
+        <Loading title="Loading Chats" />
       )}
     </InboxBox>
   );

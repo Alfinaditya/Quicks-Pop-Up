@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import { useRef } from "react";
 import Loading from "../../components/Loading";
 import {
-  Body,
+  CollapseBody,
   Dropdown,
   DropdownButton,
   Head,
@@ -17,6 +17,30 @@ import {
   DropdownText,
   TaskItem,
   TaskItemContainer,
+  TaskCheckbox,
+  TaskItemHead,
+  DaysLeft,
+  CreatedAt,
+  TaskToolsContainer,
+  OptionsBubble,
+  OptionsBubbleText,
+  CollapseIconContainer,
+  TaskOptionContainer,
+  DateContainer,
+  ClockIconContainer,
+  CalendarIconContainer,
+  HiddenDatePickerInput,
+  DescriptionContainer,
+  PenIconContainer,
+  DescriptionTextArea,
+  StickersContainer,
+  BookMarkIconContainer,
+  CurrentStickersContainer,
+  CurrentSticker,
+  AddStickerContainer,
+  Sticker,
+  StickerName,
+  CurrentStickerName,
 } from "./styles";
 import tasksFromServer from "./task.json";
 import stickersFromServer from "./sticker.json";
@@ -27,7 +51,6 @@ import {
   CalendarIcon,
   ClockIcon,
   PenIcon,
-  ExpandMoreIcon,
   OptionsIcon,
   ArrowDownWardIcon,
   ArrowUpWardIcon,
@@ -228,7 +251,8 @@ const Task = () => {
             onClick={() => tasks && setOpenDropdown(!openDropdown)}
           >
             <DropdownText>My Tasks</DropdownText>
-            <ExpandMoreIcon />
+            <ArrowDownWardIcon />
+            {/* <ExpandMoreIcon /> */}
           </DropdownButton>
           {openDropdown && (
             <DropdownValues>
@@ -254,28 +278,20 @@ const Task = () => {
               return (
                 <TaskItem key={todo.id}>
                   <TaskItemContainer>
-                    <input
-                      style={{ alignSelf: "start", marginTop: 9 }}
+                    <TaskCheckbox
                       onClick={() => handleFinishTodo(todo.id)}
                       type="checkbox"
                       defaultChecked={todo.isFinished}
                     />
                     <div
                       style={{
-                        background: "white",
                         padding: 2,
                         position: "relative",
                         width: "100%",
                       }}
                     >
                       {/* Head */}
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                          marginLeft: 23.67,
-                        }}
-                      >
+                      <TaskItemHead>
                         {todo.name ? (
                           <Title
                             id={`title-${todo.id}`}
@@ -293,49 +309,32 @@ const Task = () => {
                           />
                         )}
 
-                        <p style={{ color: "#EB5757", fontSize: 13 }}>
+                        <DaysLeft>
                           {!todo.isFinished &&
-                            todo.daysLeft &&
+                            todo.daysLeft > 0 &&
                             `${todo.daysLeft} Days Left`}
-                        </p>
-                        <p
-                          style={{
-                            fontSize: 13,
-                            marginLeft: 15,
-                            marginRight: 15,
-                          }}
-                        >
+                        </DaysLeft>
+                        <CreatedAt>
                           {todo.createdAt &&
                             dayjs(todo.createdAt).format("DD/MM/YYYY")}
-                        </p>
-                        <div style={{ display: "flex" }}>
-                          <div></div>
-                          {/* <div
-                            style={{ marginRight: 10 }}
-                            onClick={() => handleCollapse(todo.id)}
-                          >
-                            ^
-                          </div> */}
+                        </CreatedAt>
+                        <TaskToolsContainer>
+                          &nbsp;
                           <div onClick={() => handleCollapse(todo.id)}>
-                            <div
+                            <CollapseIconContainer
                               id={`arrow-upward-icon-${todo.id}`}
-                              style={{
-                                display: todo.isFinished && "none",
-                              }}
+                              isHidden={todo.isFinished}
                             >
                               <ArrowUpWardIcon />
-                            </div>
-                            <div
+                            </CollapseIconContainer>
+                            <CollapseIconContainer
                               id={`arrow-downward-icon-${todo.id}`}
-                              style={{
-                                display: !todo.isFinished && "none",
-                              }}
+                              isHidden={!todo.isFinished}
                             >
                               <ArrowDownWardIcon />
-                            </div>
+                            </CollapseIconContainer>
                           </div>
-                          <div
-                            style={{ marginLeft: 10 }}
+                          <TaskOptionContainer
                             onClick={() =>
                               setShowOptionsBubbleById(
                                 (showOptionsBubbleById) =>
@@ -346,50 +345,24 @@ const Task = () => {
                             }
                           >
                             <OptionsIcon />
-                          </div>
-                        </div>
+                          </TaskOptionContainer>
+                        </TaskToolsContainer>
                         {showOptionsBubbleById === todo.id && (
-                          <div
-                            style={{
-                              position: "absolute",
-                              right: 0,
-                              top: "30px",
-                              background: "#FFFFFF",
-                              borderRadius: 5,
-                              paddingLeft: 18.39,
-                              border: "1px solid #828282",
-                              height: 43,
-                              zIndex: 999,
-                              color: "#EB5757",
-                              width: 126,
-                              display: "flex",
-                              alignItems: "center",
-                              cursor: "pointer",
-                            }}
-                          >
-                            <span onClick={() => handleDeleteTodo(todo.id)}>
+                          <OptionsBubble>
+                            <OptionsBubbleText
+                              onClick={() => handleDeleteTodo(todo.id)}
+                            >
                               Delete
-                            </span>
-                          </div>
+                            </OptionsBubbleText>
+                          </OptionsBubble>
                         )}
-                      </div>
-                      {/* Head */}
-                      {/* <div id={todo.id} style={{}}> */}
-                      <Body id={`body-${todo.id}`} isFinished={todo.isFinished}>
-                        <div
-                          style={{
-                            display: "flex",
-                            alignItems: "center",
-                            marginTop: 17.11,
-                            marginBottom: 16.22,
-                          }}
-                        >
-                          <div
-                            style={{
-                              marginRight: 19.67,
-                              width: 16.67,
-                              height: 16.67,
-                            }}
+                      </TaskItemHead>
+                      <CollapseBody
+                        id={`body-${todo.id}`}
+                        isFinished={todo.isFinished}
+                      >
+                        <DateContainer>
+                          <ClockIconContainer
                             onClick={() => {
                               document
                                 .getElementById(`date-picker-${todo.id}`)
@@ -400,8 +373,8 @@ const Task = () => {
                               style={{ width: 16.67, height: 16.67 }}
                               stroke={todo.createdAt && "#2F80ED"}
                             />
-                          </div>
-                          {/* <p style={{ marginRight: "19.67px" }}>C</p> */}
+                          </ClockIconContainer>
+
                           <DatePicker id="date-picker">
                             <div
                               style={{
@@ -424,12 +397,7 @@ const Task = () => {
                                 }}
                                 readOnly
                               />
-                              <div
-                                style={{
-                                  position: "absolute",
-                                  top: 12,
-                                  right: 12,
-                                }}
+                              <CalendarIconContainer
                                 onClick={() => {
                                   document
                                     .getElementById(`date-picker-${todo.id}`)
@@ -437,12 +405,11 @@ const Task = () => {
                                 }}
                               >
                                 <CalendarIcon />
-                              </div>
+                              </CalendarIconContainer>
                             </div>
 
-                            <input
+                            <HiddenDatePickerInput
                               type="date"
-                              style={{ visibility: "hidden" }}
                               id={`date-picker-${todo.id}`}
                               value={
                                 calendarValue
@@ -460,20 +427,10 @@ const Task = () => {
                               }}
                             />
                           </DatePicker>
-                        </div>
+                        </DateContainer>
 
-                        <div
-                          style={{
-                            display: "flex",
-                            marginBottom: 15.6,
-                          }}
-                        >
-                          <div
-                            style={{
-                              width: 15,
-                              height: 15,
-                              marginRight: "19.67px",
-                            }}
+                        <DescriptionContainer>
+                          <PenIconContainer
                             onClick={() =>
                               setShowEditDescriptionInputById(todo.id)
                             }
@@ -482,14 +439,9 @@ const Task = () => {
                               style={{ width: 15, height: 15 }}
                               stroke={todo.description && "#2F80ED"}
                             />
-                          </div>
+                          </PenIconContainer>
                           {showEditDescriptionInputById === todo.id ? (
-                            <textarea
-                              style={{
-                                padding: 12,
-                                width: "100%",
-                                borderRadius: 5,
-                              }}
+                            <DescriptionTextArea
                               onBlur={(e) =>
                                 handleUpdateTodoDescription(
                                   todo.id,
@@ -509,36 +461,9 @@ const Task = () => {
                                 : "No Description"}
                             </Description>
                           )}
-                        </div>
-                        <div
-                          style={{
-                            display: "flex",
-                            position: "relative",
-                            background: "#F9F9F9",
-                            // height: 49,
-                            maxWidth: "100%",
-                            alignItems: "center",
-                            paddingLeft: 11,
-                            paddingTop: 7,
-                            paddingBottom: 13.42,
-                            alignItems: "center",
-                            borderRadius: 5,
-                          }}
-                          // onClick={() =>
-                          //   setShowStickersBubbleById(
-                          //     (showStickersBubbleById) =>
-                          //       showStickersBubbleById === todo.id
-                          //         ? ""
-                          //         : todo.id
-                          //   )
-                          // }
-                        >
-                          <div
-                            style={{
-                              width: 14.17,
-                              height: 18.33,
-                              cursor: "pointer",
-                            }}
+                        </DescriptionContainer>
+                        <StickersContainer>
+                          <BookMarkIconContainer
                             onClick={() =>
                               setShowStickersBubbleById(
                                 (showStickersBubbleById) =>
@@ -552,71 +477,36 @@ const Task = () => {
                               style={{ width: 14.17, height: 18.33 }}
                               stroke={todo.stickers.length && "#2F80ED"}
                             />
-                          </div>
-                          <div
-                            style={{
-                              display: "flex",
-                              width: "100%",
-                              minHeight: 49,
-                              marginLeft: "28px",
-                              flexWrap: "wrap",
-                              alignItems: "center",
-                              gap: 9.96,
-                            }}
-                          >
+                          </BookMarkIconContainer>
+                          <CurrentStickersContainer>
                             {todo.stickers.map((sticker) => (
-                              <div
+                              <CurrentSticker
+                                color={sticker.color}
                                 key={sticker.id}
-                                style={{
-                                  background: sticker.color,
-                                  color: "black",
-                                  paddingTop: 8,
-                                  paddingBottom: 8,
-                                  paddingRight: 12,
-                                  paddingLeft: 12,
-                                  borderRadius: 5,
-                                }}
                               >
-                                {sticker.name}
-                              </div>
+                                <CurrentStickerName>
+                                  {sticker.name}
+                                </CurrentStickerName>
+                              </CurrentSticker>
                             ))}
-                          </div>
+                          </CurrentStickersContainer>
                           {showStickersBubbleById === todo.id && (
-                            <div
-                              style={{
-                                width: 277,
-                                borderRadius: 5,
-                                background: "#FFFFFF",
-                                position: "absolute",
-                                zIndex: 999,
-                                top: 20,
-                                left: 0,
-                                cursor: "pointer",
-                                padding: 10,
-                              }}
-                            >
+                            <AddStickerContainer>
                               {stickers.map((sticker) => (
-                                <div
-                                  style={{
-                                    background: sticker.color,
-                                    height: 28,
-                                    marginBottom: 11,
-                                    display: "flex",
-                                    alignItems: "center",
-                                    padding: 14.07,
-                                  }}
+                                <Sticker
+                                  color={sticker.color}
                                   onClick={() =>
                                     handleAddSticker(todo.id, sticker.id)
                                   }
                                   key={sticker.id}
                                 >
-                                  <strong>{sticker.name}</strong>
-                                </div>
+                                  <StickerName>{sticker.name}</StickerName>
+                                </Sticker>
                               ))}
-                            </div>
+                            </AddStickerContainer>
                           )}
-                        </div>
-                      </Body>
+                        </StickersContainer>
+                      </CollapseBody>
                     </div>
                   </TaskItemContainer>
                 </TaskItem>
