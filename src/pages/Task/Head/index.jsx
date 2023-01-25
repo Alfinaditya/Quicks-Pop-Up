@@ -35,7 +35,7 @@ const TaskHead = ({ tasks, setTasks, setFilteringTasks, tasksDropdown }) => {
           daysLeft: "",
           stickers: [],
         };
-        return { ...task, todos: [...task.todos, params] };
+        return { ...task, todos: [params, ...task.todos] };
       }
       return { ...task };
     });
