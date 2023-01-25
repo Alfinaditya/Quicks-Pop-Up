@@ -12,6 +12,7 @@ import {
 
 const InboxDetailHead = ({ inbox }) => {
   const navigate = useNavigate();
+
   return (
     <Head>
       <ArrowBackIconContainer onClick={() => navigate("/inbox")}>
@@ -23,7 +24,7 @@ const InboxDetailHead = ({ inbox }) => {
           {!inbox.isStaff && inbox.participants} Participants
         </Participants>
       </HeadText>
-      <CloseIconContainer>
+      <CloseIconContainer onClick={() => navigate("/")}>
         <CloseIcon />
       </CloseIconContainer>
     </Head>
