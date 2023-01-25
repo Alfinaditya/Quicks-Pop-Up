@@ -32,7 +32,6 @@ const FloatingActionButtons = () => {
           <MenuContainer
             animate={showMenus ? "open" : "closed"}
             variants={variants}
-            transition={{ duration: 0.5 }}
           >
             <MenuTitle>Inbox</MenuTitle>
             <InboxButtton

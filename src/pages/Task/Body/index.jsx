@@ -176,12 +176,10 @@ const TaskBody = ({ tasks, setTasks, filteringTasks, stickers }) => {
                           </TaskOptionContainer>
                         </TaskToolsContainer>
                         {showOptionsBubbleById === todo.id && (
-                          <OptionsBubble>
-                            <OptionsBubbleText
-                              onClick={() => handleDeleteTodo(todo.id)}
-                            >
-                              Delete
-                            </OptionsBubbleText>
+                          <OptionsBubble
+                            onClick={() => handleDeleteTodo(todo.id)}
+                          >
+                            <OptionsBubbleText>Delete</OptionsBubbleText>
                           </OptionsBubble>
                         )}
                       </TaskItemHead>

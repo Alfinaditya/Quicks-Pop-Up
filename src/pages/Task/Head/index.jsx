@@ -51,8 +51,9 @@ const TaskHead = ({ tasks, setTasks, setFilteringTasks, tasksDropdown }) => {
         </DropdownButton>
         {openDropdown && (
           <DropdownValues>
-            {tasksDropdown.map((task) => (
+            {tasksDropdown.map((task, i) => (
               <DropdownValue
+                isLast={tasksDropdown.length - 1 === i}
                 onClick={() => {
                   handleFilter(task.id);
                 }}

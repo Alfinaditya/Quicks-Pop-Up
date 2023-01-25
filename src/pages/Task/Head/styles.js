@@ -37,6 +37,6 @@ export const DropdownValues = styled.div`
 `;
 
 export const DropdownValue = styled.div`
-  border-bottom: 1px solid #828282;
+  border-bottom: ${(props) => !props.isLast && "1px solid #828282"};
   padding: 15px;
 `;

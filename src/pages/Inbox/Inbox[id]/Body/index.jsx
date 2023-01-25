@@ -91,12 +91,8 @@ const InboxDetailBody = ({
                         <Edit>
                           <EditText>Edit</EditText>
                         </Edit>
-                        <Delete>
-                          <DeleteText
-                            onClick={() => handleDeleteMessage(chat.id)}
-                          >
-                            Delete
-                          </DeleteText>
+                        <Delete onClick={() => handleDeleteMessage(chat.id)}>
+                          <DeleteText>Delete</DeleteText>
                         </Delete>
                       </OptionsBubble>
                     )}
@@ -120,12 +116,8 @@ const InboxDetailBody = ({
                         <Share>
                           <ShareText>Share</ShareText>
                         </Share>
-                        <Reply>
-                          <ReplyText
-                            onClick={() => handleReplyMessage(chat.id)}
-                          >
-                            Reply
-                          </ReplyText>
+                        <Reply onClick={() => handleReplyMessage(chat.id)}>
+                          <ReplyText>Reply</ReplyText>
                         </Reply>
                       </OptionsBubble>
                     )}

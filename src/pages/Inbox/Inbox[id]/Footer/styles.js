@@ -37,7 +37,8 @@ export const ReplyingMessageContainer = styled.div`
   padding-top: 15px;
   padding-bottom: 12.44px;
   border: 1px solid #828282;
-  border-radius: 5px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 `;
 
 export const ReplyingMessageHead = styled.div`
