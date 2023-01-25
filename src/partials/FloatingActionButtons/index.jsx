@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { matchRoutes, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { BubbleChatIcon, ReadModeIcon, ThunderIcon } from "../../icons";
 import {
   Container,
@@ -38,6 +38,7 @@ const FloatingActionButtons = () => {
             <InboxButtton
               isActive={pathname.includes("inbox")}
               onClick={() => navigate("inbox")}
+              whileTap={{ scale: 0.9 }}
             >
               <BubbleChatIcon
                 fill={pathname.includes("inbox") ? "#f2f2f2" : "#8785ff"}
@@ -53,6 +54,7 @@ const FloatingActionButtons = () => {
             <TaskButton
               isActive={pathname === "/task"}
               onClick={() => navigate("task")}
+              whileTap={{ scale: 0.9 }}
             >
               <ReadModeIcon
                 fill={pathname === "/task" ? "#f2f2f2" : "#F8B76B"}

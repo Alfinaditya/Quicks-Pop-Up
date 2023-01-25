@@ -2,37 +2,15 @@ import React, { Fragment, useState } from "react";
 import {
   ArrowDownWardIcon,
   ArrowUpWardIcon,
-  BookMarkIcon,
-  CalendarIcon,
-  ClockIcon,
   OptionsIcon,
-  PenIcon,
 } from "../../../icons";
 import {
-  AddStickerContainer,
-  BookMarkIconContainer,
-  CalendarIconContainer,
-  ClockIconContainer,
   CollapseBody,
   CollapseIconContainer,
   CreatedAt,
-  CurrentSticker,
-  CurrentStickerName,
-  CurrentStickersContainer,
-  DateContainer,
-  DatePicker,
-  DatePickerInput,
   DaysLeft,
-  Description,
-  DescriptionContainer,
-  DescriptionTextArea,
-  HiddenDatePickerInput,
   OptionsBubble,
   OptionsBubbleText,
-  PenIconContainer,
-  Sticker,
-  StickerName,
-  StickersContainer,
   TaskCheckbox,
   TaskItem,
   TaskItemContainer,
@@ -44,6 +22,9 @@ import {
 } from "./styles";
 import Loading from "../../../components/Loading";
 import dayjs from "dayjs";
+import StickersSection from "./Stickers";
+import DescriptionSection from "./Description";
+import CalendarSection from "./Calendar";
 
 const TaskBody = ({
   tasks,
@@ -53,10 +34,6 @@ const TaskBody = ({
   setStickers,
 }) => {
   const [showOptionsBubbleById, setShowOptionsBubbleById] = useState("");
-  const [showStickersBubbleById, setShowStickersBubbleById] = useState("");
-  const [calendarValue, setCalendarValue] = useState("");
-  const [showEditDescriptionInputById, setShowEditDescriptionInputById] =
-    useState("");
 
   function handleCollapse(id) {
     const element = document.getElementById(`body-${id}`);
@@ -99,42 +76,11 @@ const TaskBody = ({
     setTasks(updatedTasks);
   }
 
-  function handleUpdateTodoDescription(id, value) {
-    setShowEditDescriptionInputById("");
-    const updatedTodos = tasks.map((task) => {
-      return task.todos.map((todo) => {
-        if (todo.id === id) {
-          return { ...todo, description: value };
-        }
-        return { ...todo };
-      });
-    });
-    const updatedTasks = tasks.map((task, i) => {
-      return { ...task, todos: updatedTodos[i] };
-    });
-    setTasks(updatedTasks);
-  }
-
   function handleUpdateTodoName(id, value) {
     const updatedTodos = tasks.map((task) => {
       return task.todos.map((todo) => {
         if (todo.id === id) {
           return { ...todo, name: value };
-        }
-        return { ...todo };
-      });
-    });
-    const updatedTasks = tasks.map((task, i) => {
-      return { ...task, todos: updatedTodos[i] };
-    });
-    setTasks(updatedTasks);
-  }
-
-  function handleUpdateCalendar(id, value) {
-    const updatedTodos = tasks.map((task) => {
-      return task.todos.map((todo) => {
-        if (todo.id === id) {
-          return { ...todo, createdAt: value };
         }
         return { ...todo };
       });
@@ -155,28 +101,6 @@ const TaskBody = ({
       return { ...task, todos: updatedTodos[i] };
     });
     setTasks(updatedTasks);
-  }
-
-  function handleAddSticker(id, stickerId) {
-    const sticker = stickers.find((sticker) => sticker.id === stickerId);
-
-    const updatedTodos = tasks.map((task) => {
-      return task.todos.map((todo) => {
-        if (todo.id === id) {
-          // To Check if Current Todos sticker contains duplicate value
-          if (todo.stickers.find((st) => st.id === sticker.id)) {
-            return { ...todo };
-          }
-          return { ...todo, stickers: [...todo.stickers, sticker] };
-        }
-        return { ...todo };
-      });
-    });
-    const updatedTasks = tasks.map((task, i) => {
-      return { ...task, todos: updatedTodos[i] };
-    });
-    setTasks(updatedTasks);
-    setShowStickersBubbleById("");
   }
 
   return (
@@ -271,151 +195,22 @@ const TaskBody = ({
                         id={`body-${todo.id}`}
                         isFinished={todo.isFinished}
                       >
-                        <DateContainer>
-                          <ClockIconContainer
-                            onClick={() => {
-                              document
-                                .getElementById(`date-picker-${todo.id}`)
-                                .showPicker();
-                            }}
-                          >
-                            <ClockIcon
-                              style={{ width: 16.67, height: 16.67 }}
-                              stroke={todo.createdAt && "#2F80ED"}
-                            />
-                          </ClockIconContainer>
-
-                          <DatePicker id="date-picker">
-                            <div
-                              style={{
-                                position: "relative",
-                                width: "min-content",
-                              }}
-                            >
-                              <DatePickerInput
-                                type="text"
-                                defaultValue={
-                                  todo.createdAt
-                                    ? dayjs(todo.createdAt).format("DD/MM/YYYY")
-                                    : "Set Date"
-                                }
-                                id={`calendar-${todo.id}`}
-                                onClick={() => {
-                                  document
-                                    .getElementById(`date-picker-${todo.id}`)
-                                    .showPicker();
-                                }}
-                                readOnly
-                              />
-                              <CalendarIconContainer
-                                onClick={() => {
-                                  document
-                                    .getElementById(`date-picker-${todo.id}`)
-                                    .showPicker();
-                                }}
-                              >
-                                <CalendarIcon />
-                              </CalendarIconContainer>
-                            </div>
-
-                            <HiddenDatePickerInput
-                              type="date"
-                              id={`date-picker-${todo.id}`}
-                              value={
-                                calendarValue
-                                  ? calendarValue
-                                  : dayjs(todo.createdAt).format("YYYY-DD-MM")
-                              }
-                              onChange={(e) => {
-                                handleUpdateCalendar(todo.id, e.target.value);
-                                setCalendarValue(e.target.value);
-                                document.getElementById(
-                                  `calendar-${todo.id}`
-                                ).value = dayjs(e.target.value).format(
-                                  "DD/MM/YYYY"
-                                );
-                              }}
-                            />
-                          </DatePicker>
-                        </DateContainer>
-
-                        <DescriptionContainer>
-                          <PenIconContainer
-                            onClick={() =>
-                              setShowEditDescriptionInputById(todo.id)
-                            }
-                          >
-                            <PenIcon
-                              style={{ width: 15, height: 15 }}
-                              stroke={todo.description && "#2F80ED"}
-                            />
-                          </PenIconContainer>
-                          {showEditDescriptionInputById === todo.id ? (
-                            <DescriptionTextArea
-                              onBlur={(e) =>
-                                handleUpdateTodoDescription(
-                                  todo.id,
-                                  e.target.value
-                                )
-                              }
-                              defaultValue={todo.description}
-                            />
-                          ) : (
-                            <Description
-                              onClick={() =>
-                                setShowEditDescriptionInputById(todo.id)
-                              }
-                            >
-                              {todo.description
-                                ? todo.description
-                                : "No Description"}
-                            </Description>
-                          )}
-                        </DescriptionContainer>
-                        <StickersContainer>
-                          <BookMarkIconContainer
-                            onClick={() =>
-                              setShowStickersBubbleById(
-                                (showStickersBubbleById) =>
-                                  showStickersBubbleById === todo.id
-                                    ? ""
-                                    : todo.id
-                              )
-                            }
-                          >
-                            <BookMarkIcon
-                              style={{ width: 14.17, height: 18.33 }}
-                              stroke={todo.stickers.length && "#2F80ED"}
-                            />
-                          </BookMarkIconContainer>
-                          <CurrentStickersContainer>
-                            {todo.stickers.map((sticker) => (
-                              <CurrentSticker
-                                color={sticker.color}
-                                key={sticker.id}
-                              >
-                                <CurrentStickerName>
-                                  {sticker.name}
-                                </CurrentStickerName>
-                              </CurrentSticker>
-                            ))}
-                          </CurrentStickersContainer>
-                          {showStickersBubbleById === todo.id && (
-                            <AddStickerContainer>
-                              {stickers.map((sticker) => (
-                                <Sticker
-                                  color={sticker.color}
-                                  onClick={() =>
-                                    handleAddSticker(todo.id, sticker.id)
-                                  }
-                                  key={sticker.id}
-                                >
-                                  <StickerName>{sticker.name}</StickerName>
-                                </Sticker>
-                              ))}
-                            </AddStickerContainer>
-                          )}
-                        </StickersContainer>
+                        <CalendarSection
+                          tasks={tasks}
+                          setTasks={setTasks}
+                          todo={todo}
+                        />
+                        <DescriptionSection
+                          tasks={tasks}
+                          setTasks={setTasks}
+                          todo={todo}
+                        />
+                        <StickersSection
+                          tasks={tasks}
+                          setTasks={setTasks}
+                          todo={todo}
+                          stickers={stickers}
+                        />
                       </CollapseBody>
                     </div>
                   </TaskItemContainer>

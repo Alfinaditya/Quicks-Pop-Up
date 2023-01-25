@@ -7,7 +7,7 @@ const InboxHead = () => {
     <Head>
       <SearchInput type="search" placeholder="Search" />
       <SearchIconContainer>
-        <SearchIcon style={{ width: 12, height: 12 }} />
+        <SearchIcon fill={"#333333"} style={{ width: 12, height: 12 }} />
       </SearchIconContainer>
     </Head>
   );
