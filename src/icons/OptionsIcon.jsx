@@ -1,6 +1,6 @@
 import React from "react";
 
-const OptionsIcon = () => {
+const OptionsIcon = ({ ...props }) => {
   return (
     <svg
       width="12"
@@ -8,6 +8,7 @@ const OptionsIcon = () => {
       viewBox="0 0 12 4"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      {...props}
     >
       <path
         fillRule="evenodd"

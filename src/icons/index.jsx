@@ -11,3 +11,6 @@ export { default as ArrowDownWardIcon } from "./ArrowDownWardIcon";
 export { default as ArrowUpWardIcon } from "./ArrowUpWardIcon";
 export { default as FastVisaSupportIcon } from "./FastVisaSupportIcon";
 export { default as SearchIcon } from "./SearchIcon";
+export { default as ArrowBackIcon } from "./ArrowBackIcon";
+export { default as ArrowDownIcon } from "./ArrowDownIcon";
+export { default as CloseIcon } from "./CloseIcon";

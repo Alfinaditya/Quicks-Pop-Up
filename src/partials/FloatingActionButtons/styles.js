@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { motion } from "framer-motion";
 
-const MenuButton = styled.div`
+const MenuButton = styled(motion.div)`
   border-radius: 50%;
   width: 68px;
   height: 68px;
@@ -11,6 +12,11 @@ const MenuButton = styled.div`
 
 export const Container = styled.div`
   display: flex;
+  /* align-items: center;   */
+  /* background-color: red; */
+  /* padding: 10px; */
+  /* padding: 100px; */
+  position: relative;
 `;
 
 export const Menu = styled.div`
@@ -19,6 +25,7 @@ export const Menu = styled.div`
   right: 0;
   margin-right: 34px;
   margin-bottom: 27px;
+  /* background-color: yellow; */
 `;
 
 export const ShowMenusButton = styled(MenuButton)`
@@ -26,15 +33,18 @@ export const ShowMenusButton = styled(MenuButton)`
 `;
 
 export const InboxButtton = styled(MenuButton)`
-  background: #8785ff;
+  background: ${(props) => (props.isActive ? "#8785ff" : "#f2f2f2")};
 `;
 
 export const TaskButton = styled(MenuButton)`
-  background: #f8b76b;
+  background: ${(props) => (props.isActive ? "#f8b76b" : "#f2f2f2")};
 `;
 
-export const MenuContainer = styled.div`
-  margin-left: 26px;
+export const MenuContainer = styled(motion.div)`
+  /* margin-left: 26px; */
+  cursor: pointer;
+  /* position: absolute; */
+  /* right: 0; */
 `;
 
 export const MenuTitle = styled.p`
