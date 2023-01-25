@@ -14,3 +14,4 @@ export { default as SearchIcon } from "./SearchIcon";
 export { default as ArrowBackIcon } from "./ArrowBackIcon";
 export { default as ArrowDownIcon } from "./ArrowDownIcon";
 export { default as CloseIcon } from "./CloseIcon";
+export { default as LoadingAnimateIcon } from "./LoadingAnimateIcon";

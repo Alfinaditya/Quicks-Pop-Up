@@ -21,7 +21,7 @@ const InboxDetailHead = ({ inbox }) => {
       <HeadText>
         <Title>{inbox.title}</Title>
         <Participants>
-          {!inbox.isStaff && inbox.participants} Participants
+          {!inbox.isStaff && `${inbox.participants} Participants`}
         </Participants>
       </HeadText>
       <CloseIconContainer onClick={() => navigate("/")}>

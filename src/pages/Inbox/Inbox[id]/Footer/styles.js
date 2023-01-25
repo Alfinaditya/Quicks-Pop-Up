@@ -9,16 +9,21 @@ export const Footer = styled.div`
 
 export const WaitingToConnectAlert = styled.div`
   padding: 10px;
-  margin-bottom: 10px;
+  padding-left: 20px;
   display: flex;
+  align-items: center;
   background: #e9f3ff;
   padding-left: 14.41px;
+  border-radius: 5px;
 `;
 
 export const SendMessageForm = styled.form`
-  padding-right: 20px;
-  padding-left: 20px;
+  /* padding-right: 20px;
+  padding-left: 20px; */
+  margin-top: 10px;
   display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const BottomLeftContainer = styled.div`
@@ -32,6 +37,7 @@ export const ReplyingMessageContainer = styled.div`
   padding-top: 15px;
   padding-bottom: 12.44px;
   border: 1px solid #828282;
+  border-radius: 5px;
 `;
 
 export const ReplyingMessageHead = styled.div`
@@ -53,3 +59,18 @@ export const SendMessageInput = styled(Input)`
 `;
 
 export const ReplyingMessage = styled.p``;
+
+export const LoadingAnimateIconContainer = styled.div`
+  width: 34.41px;
+  height: 34.41px;
+  margin-right: 12px;
+`;
+
+export const WaitingToConnectAlertText = styled.strong`
+  font-size: 13px;
+`;
+
+export const Container = styled.div`
+  padding-left: 20px;
+  padding-right: 20px;
+`;

@@ -21,6 +21,7 @@ export const Body = styled.div`
 
 export const SenderName = styled.p`
   color: ${(props) => props.color};
+  font-weight: bold;
   ${(props) =>
     props.type === "me" &&
     css`

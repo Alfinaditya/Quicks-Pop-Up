@@ -9,6 +9,7 @@ import {
   Head,
   DropdownValue,
 } from "./styles";
+import tasksFromServer from "../task.json";
 
 const TaskHead = ({ tasks, setTasks, setFilteringTasks, tasksDropdown }) => {
   const [openDropdown, setOpenDropdown] = useState(false);
@@ -17,7 +18,7 @@ const TaskHead = ({ tasks, setTasks, setFilteringTasks, tasksDropdown }) => {
     setOpenDropdown(false);
     setFilteringTasks(true);
     setTimeout(() => {
-      setTasks((tasks) => [tasks.find((x) => x.id === id)]);
+      setTasks([tasksFromServer.find((x) => x.id === id)]);
       setFilteringTasks(false);
     }, 1500);
   }

@@ -26,13 +26,7 @@ import StickersSection from "./Stickers";
 import DescriptionSection from "./Description";
 import CalendarSection from "./Calendar";
 
-const TaskBody = ({
-  tasks,
-  setTasks,
-  filteringTasks,
-  stickers,
-  setStickers,
-}) => {
+const TaskBody = ({ tasks, setTasks, filteringTasks, stickers }) => {
   const [showOptionsBubbleById, setShowOptionsBubbleById] = useState("");
 
   function handleCollapse(id) {
