@@ -28,39 +28,41 @@ const FloatingActionButtons = () => {
   return (
     <Menu>
       <Container>
-        <>
-          <MenuContainer
-            animate={showMenus ? "open" : "closed"}
-            variants={variants}
-          >
-            <MenuTitle>Inbox</MenuTitle>
-            <InboxButtton
-              isActive={pathname.includes("inbox")}
-              onClick={() => navigate("inbox")}
-              whileTap={{ scale: 0.9 }}
+        {showMenus && (
+          <>
+            <MenuContainer
+              animate={showMenus ? "open" : "closed"}
+              variants={variants}
             >
-              <BubbleChatIcon
-                fill={pathname.includes("inbox") ? "#f2f2f2" : "#8785ff"}
-              />
-            </InboxButtton>
-          </MenuContainer>
-          <MenuContainer
-            animate={showMenus ? "open" : "closed"}
-            transition={{ duration: 0.5 }}
-            variants={variants}
-          >
-            <MenuTitle>Task</MenuTitle>
-            <TaskButton
-              isActive={pathname === "/task"}
-              onClick={() => navigate("task")}
-              whileTap={{ scale: 0.9 }}
+              <MenuTitle>Inbox</MenuTitle>
+              <InboxButtton
+                isActive={pathname.includes("inbox")}
+                onClick={() => navigate("inbox")}
+                whileTap={{ scale: 0.9 }}
+              >
+                <BubbleChatIcon
+                  fill={pathname.includes("inbox") ? "#f2f2f2" : "#8785ff"}
+                />
+              </InboxButtton>
+            </MenuContainer>
+            <MenuContainer
+              animate={showMenus ? "open" : "closed"}
+              transition={{ duration: 0.5 }}
+              variants={variants}
             >
-              <ReadModeIcon
-                fill={pathname === "/task" ? "#f2f2f2" : "#F8B76B"}
-              />
-            </TaskButton>
-          </MenuContainer>
-        </>
+              <MenuTitle>Task</MenuTitle>
+              <TaskButton
+                isActive={pathname === "/task"}
+                onClick={() => navigate("task")}
+                whileTap={{ scale: 0.9 }}
+              >
+                <ReadModeIcon
+                  fill={pathname === "/task" ? "#f2f2f2" : "#F8B76B"}
+                />
+              </TaskButton>
+            </MenuContainer>
+          </>
+        )}
         <MenuContainer>
           <MenuTitle>&nbsp;</MenuTitle>
           <ShowMenusButton
